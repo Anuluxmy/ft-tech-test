@@ -1,0 +1,21 @@
+{
+  "name": "ft-tech-test",
+  "version": "1.0.0",
+  "description": "FT Tech Test by Michael Allen",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "mocha src/**/*.test.js"
+  },
+  "author": "Michael Allen (michael@allen.digital)",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^5.2.0",
+    "supertest": "^3.3.0"
+  }
+}
