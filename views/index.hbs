@@ -1,1 +1,12 @@
-<div><p>An empty page</p></div>
+<div class="o-grid-container">
+  <div class="o-grid-row">
+    <header data-o-grid-colspan="two-thirds">
+      <h1>Random Article</h1>
+    </header>
+  </div>
+  <div class="o-grid-row">
+    {{#with article}}
+    {{> components/teaser }}
+    {{/with}}
+  </div>
+</div>

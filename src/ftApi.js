@@ -11,7 +11,7 @@ const search = async (queryString) => {
     body: JSON.stringify({
       queryString,
       resultContext: {
-        aspects: ['title', 'summary'],
+        aspects: ['title', 'lifecycle', 'location', 'summary'],
         maxResults: 20
       }
     })

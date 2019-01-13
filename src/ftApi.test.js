@@ -1,6 +1,6 @@
 const { expect } = require('../test/chai');
+const proxyquire = require('proxyquire').noCallThru();
 const fetchMock = require('fetch-mock').sandbox();
-const proxyquire = require('proxyquire');
 
 const apiHost = 'http://api.ft.com';
 const ftApiKey = '1234567890abcdef';
