@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "FT Tech Test by Michael Allen",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "nodemon src/index.js",
     "test": "mocha src/**/*.test.js",
     "test:integration": "mocha src/**/*.integration.js"
   },
@@ -20,6 +20,7 @@
     "chai-as-promised": "^7.1.1",
     "fetch-mock": "^7.3.0",
     "mocha": "^5.2.0",
+    "nodemon": "^1.18.9",
     "proxyquire": "^2.1.0",
     "supertest": "^3.3.0"
   }
