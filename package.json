@@ -4,18 +4,22 @@
   "description": "FT Tech Test by Michael Allen",
   "scripts": {
     "start": "node src/index.js",
-    "test": "mocha src/**/*.test.js"
+    "test": "mocha src/**/*.test.js",
+    "test:integration": "mocha src/**/*.integration.js"
   },
   "author": "Michael Allen (michael@allen.digital)",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^6.2.0",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "node-fetch": "^2.3.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
+    "fetch-mock": "^7.3.0",
     "mocha": "^5.2.0",
+    "proxyquire": "^2.1.0",
     "supertest": "^3.3.0"
   }
 }
