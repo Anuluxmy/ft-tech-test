@@ -19,4 +19,15 @@ describe('App', () => {
       expect($('title').text()).to.eql('FT Tech Test - Michael Allen');
     });
   });
+
+  describe('GET /search', () => {
+    it('renders the search results', async () => {
+      const response = await supertest(app).get('/search').query({ q: 'brexit' });
+
+      expect(response.status).to.eql(200);
+      const $ = cheerio.load(response.text);
+
+      expect($('title').text()).to.eql('Search results for "brexit"');
+    });
+  });
 });

@@ -1,0 +1,15 @@
+<div class="o-grid-container">
+  <div class="o-grid-row">
+    <header data-o-grid-colspan="two-thirds">
+      <h1>Search results for "{{ query }}"</h1>
+    </header>
+  </div>
+  <div class="o-grid-row">
+    <div class="o-teaser-collection" data-o-grid-colspan="two-thirds">
+      <h2 class="o-teaser-collection__heading">Viewing results 1‒{{ articles.length }}</h2>
+      {{#each articles}}
+      {{> components/teaser }}
+      {{/each}}
+    </div>
+  </div>
+</div>

@@ -5,8 +5,10 @@
     </header>
   </div>
   <div class="o-grid-row">
-    {{#with article}}
-    {{> components/teaser }}
-    {{/with}}
+    <article data-o-grid-colspan="two-thirds">
+      {{#with article}}
+      {{> components/teaser }}
+      {{/with}}
+    </article>
   </div>
 </div>

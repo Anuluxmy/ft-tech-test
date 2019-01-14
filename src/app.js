@@ -18,6 +18,7 @@ const origamiComponents = [
   'o-header@^7.7.0',
   'o-footer-services@^2.0.3',
   'o-teaser@^2.3.2',
+  'o-teaser-collection@^2.2.0',
   'o-fonts@^3.2.0',
   'o-grid@^4.4.4',
   'o-colors@^4.7.9',
@@ -36,6 +37,16 @@ app.get('/', async (req, res) => {
 
   const randomIndex = Math.floor(Math.random() * results.length);
   res.render('index', { article: results[randomIndex] });
+});
+
+app.get('/search', async (req, res) => {
+  const query = req.query.q || '';
+  const results = await ftApi.search(query);
+  res.render('search', {
+    query,
+    articles: results,
+    title: `Search results for "${query}"`
+  });
 });
 
 module.exports = app;
