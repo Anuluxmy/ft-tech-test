@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "FT Tech Test by Michael Allen",
   "scripts": {
-    "start": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "test": "mocha src/**/*.test.js",
     "test:integration": "mocha src/**/*.integration.js"
   },
