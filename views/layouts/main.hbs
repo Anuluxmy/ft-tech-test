@@ -1,11 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html class="core">
 <head>
     <meta charset="utf-8">
     <title>{{ title }}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <script>
+      var cutsTheMustard = ('querySelector' in document && 'localStorage' in window && 'addEventListener' in window);
+
+      if (cutsTheMustard) {
+        // Swap the `core` class on the HTML element for an `enhanced` one
+        // We're doing it early in the head to avoid a flash of unstyled content
+        document.documentElement.className = document.documentElement.className.replace(/\bcore\b/g, 'enhanced');
+      }
+    </script>
+
+    <style>
+      /* Hide any enhanced experience content when in core mode, and vice versa. */
+      .core .o--if-js,
+      .enhanced .o--if-no-js { display: none !important; }
+      /* Add any other inline styles here */
+    </style>
     <link rel="stylesheet" href="https://www.ft.com/__origami/service/build/v2/bundles/css?modules={{ oComponents }}&brand=master" />
     <link rel="stylesheet" href="/public/main.css" />
     <script src="https://www.ft.com/__origami/service/build/v2/bundles/js?modules={{ oComponents }}&brand=master"></script>
