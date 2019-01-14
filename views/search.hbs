@@ -5,11 +5,55 @@
     </header>
   </div>
   <div class="o-grid-row">
+    <div data-o-grid-colspan="two-thirds">
+      <form class="o-forms o-forms--wide search-form__wrapper" action="/search" role="search" aria-label="Site search">
+        <label class="o-forms__label o-normalise-visually-hidden" for="text-suffix">Query</label>
+        <div class="o-forms__affix-wrapper">
+          <input id="text-suffix" type="text" name="q" class="o-forms__text" {{#if query}}value="{{ query }}"{{/if}}>
+          <div class="o-forms__suffix">
+            <button class="o-buttons o-buttons--secondary o-buttons--big" type="submit">
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="o-grid-row">
     <div class="o-teaser-collection" data-o-grid-colspan="two-thirds">
-      <h2 class="o-teaser-collection__heading">Viewing results 1‒{{ articles.length }}</h2>
-      {{#each articles}}
-      {{> components/teaser }}
-      {{/each}}
+      <h2 class="o-teaser-collection__heading">
+        Viewing results {{ paging.first }}‒{{ paging.last }} of {{ paging.totalResults }}
+      </h2>
+      <ul class="search-results_result-list">
+        {{#each articles}}
+        <li>
+          {{> components/teaser }}
+        </li>
+        {{/each}}
+      </ul>
+      <nav class="search-results__nav-controls">
+        <div class="o-buttons__pagination">
+          <a class="o-buttons o-buttons-icon o-buttons-icon--arrow-left o-buttons-icon--icon-only"
+            {{#if paging.isFirstPage }}
+             disabled="disabled"
+            {{else}}
+             href="{{ links.prevPageLink }}"
+            {{/if}}
+          >
+            <span class="o-buttons-icon__label">Fewer results</span>
+          </a>
+          <div class="search-results__paging-detail">Page {{ paging.currentPage }} of {{ paging.maxPages }}</div>
+          <a class="o-buttons o-buttons-icon o-buttons-icon--arrow-right o-buttons-icon--icon-only"
+            {{#if paging.isLastPage }}
+             disabled="disabled"
+            {{else}}
+             href="{{ links.nextPageLink }}"
+            {{/if}}
+          >
+            <span class="o-buttons-icon__label">More results</span>
+          </a>
+        </div>
+      </nav>
     </div>
   </div>
 </div>

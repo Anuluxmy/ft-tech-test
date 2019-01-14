@@ -27,6 +27,16 @@ const mockResponse = [{
   lifecycle: { initialPublishDateTime: moment().toISOString() }
 }];
 
+const paging = {
+  first: 1,
+  last: 1,
+  totalResults: 1,
+  prevOffset: 0,
+  currentPage: 1,
+  maxPages: 1,
+  isFirstPage: true,
+  isLastPage: true
+};
 
 const app = proxyquire('./app', {
   './ftApi': mockFtApi
@@ -39,7 +49,7 @@ describe('App', () => {
 
   describe('GET /', () => {
     it('renders an article', async () => {
-      mockFtApi.search.resolves(singleResponse);
+      mockFtApi.search.resolves({ paging, results: singleResponse });
 
       const response = await supertest(app).get('/');
 
@@ -55,7 +65,7 @@ describe('App', () => {
 
   describe('GET /search', () => {
     it('renders the search results', async () => {
-      mockFtApi.search.resolves(mockResponse);
+      mockFtApi.search.resolves({ paging, results: mockResponse });
 
       const response = await supertest(app)
         .get('/search')
