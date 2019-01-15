@@ -1,29 +1,6 @@
 // I am a service worker
 var cacheKey = 'ft-tech-test-v1';
 
-self.addEventListener('install', function () {
-  self.skipWaiting();
-});
-
-self.addEventListener('fetch', function (event) {
-  event.respondWith(fromNetwork(event.request, 2000).catch(function () {
-    return fromCache(event.request);
-  }));
-});
-
-function fromNetwork(request, timeout) {
-  return new Promise(function (resolve, reject) {
-    var timeoutId = setTimeout(reject, timeout);
-
-    fetch(request).then(function (response) {
-      console.log('Fetched ' + request.url);
-      clearTimeout(timeoutId);
-      cacheResponse(request, response);
-      resolve(response);
-    }, reject);
-  });
-}
-
 function cacheResponse(request, response) {
   var clone = response.clone();
   caches.open(cacheKey).then(function (cache) {
@@ -32,11 +9,36 @@ function cacheResponse(request, response) {
   });
 }
 
-function fromCache(request) {
-  return caches.open(cacheKey).then(function (cache) {
-    return cache.match(request).then(function (matching) {
-      console.log('Using cache for ' + request.url + '. Present ' + !!matching);
-      return matching || Promise.reject('no-match');
+function fetchOrFallback(request, timeout) {
+  return new Promise(function (resolve, reject) {
+    caches.open(cacheKey).then(function (cache) {
+      cache.match(request).then(function (isInCache) {
+        function fallbackIfInCache () {
+          if (isInCache) {
+            resolve(isInCache);
+          }
+        }
+        function failIfNotInCache (error) {
+          if (!isInCache) {
+            reject(error);
+          } else {
+            resolve(isInCache);
+          }
+        }
+        const timeoutId = setTimeout(fallbackIfInCache, timeout);
+
+        fetch(request).then(function (response) {
+          clearTimeout(timeoutId);
+          cacheResponse(request, response);
+          resolve(response);
+        }, failIfNotInCache);
+      });
     });
   });
 }
+
+self.addEventListener('fetch', function (event) {
+  var fetchPromise = fetchOrFallback(event.request, 400);
+  event.waitUntil(fetchPromise);
+  event.respondWith(fetchPromise);
+});
