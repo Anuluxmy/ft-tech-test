@@ -28,6 +28,13 @@
 
 
     <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker').then(function() {
+          console.log('service worker registered.');
+        }, function() {
+          console.log('failed to register service worker.');
+        });
+      }
       (function(src) {
         if (cutsTheMustard) {
           var o = document.createElement('script');

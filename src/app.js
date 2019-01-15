@@ -33,6 +33,7 @@ app.locals.githubRepo = 'https://github.com/michaeldfallen/ft-tech-test';
 app.locals.title = 'FT Tech Test - Michael Allen'
 
 app.use('/public', express.static('public'));
+app.use('/service-worker', express.static('public/service-worker.js'));
 
 app.get('/', async (req, res) => {
   const { results } = await ftApi.search('');
