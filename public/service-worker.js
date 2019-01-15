@@ -6,7 +6,7 @@ self.addEventListener('install', function () {
 });
 
 self.addEventListener('fetch', function (event) {
-  event.respondWith(fromNetwork(event.request, 400).catch(function () {
+  event.respondWith(fromNetwork(event.request, 2000).catch(function () {
     return fromCache(event.request);
   }));
 });
